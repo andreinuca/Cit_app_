@@ -1,0 +1,381 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-highlight-color: transparent;
+}
+
+*::selection {
+    background: transparent;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Verdana;
+    background: #5c5c5c;
+}
+
+.input-field input[type=text]:focus+label {
+    color: #A9A9FF!important;
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #A9A9FF!important;
+    box-shadow: 0 1px 0 0 #A9A9FF!important;
+}
+
+.cit__navonline {
+    border-top: solid 0px #99CC99;
+    border-right: solid 5px #99CC99;
+    transition: border 700ms;
+}
+
+.cit__navoffline {
+    border-top: solid 0px #ff9999;
+    border-right: solid 5px #ff9999;
+    transition: border 700ms;
+}
+
+.cit__navremove {
+    border-top: solid 0px #323232;
+    border-right: solid 5px #323232;
+    transition: border 700ms;
+}
+
+.btn {
+    background: #626262 !important;
+    opacity: 0.8 !important;
+}
+
+.btn:hover {
+    background: #525252 !important;
+    opacity: 1;
+}
+
+.cit__userchanger {
+    background: #424242 !important;
+    width: 600px;
+    height: inherit;
+    top: 20% !important;
+    max-height: 100% !important;
+    padding: 0 !important;
+    position: fixed !important;
+    padding: 0 !important;
+}
+
+.cit__userchanger * {
+    color: #fff;
+}
+
+.cit__userchange h4 {
+    margin: 0;
+}
+
+.cit__BtnchangeSave {
+    background: #626262 !important;
+    position: absolute !important;
+    right: 1rem !important;
+    bottom: 1rem !important;
+    opacity: 0.8 !important;
+}
+
+.cit__BtnchangeSave:hover {
+    background: #525252 !important;
+    opacity: 1;
+}
+
+.cit__settings {
+    display: grid;
+    grid-column: 2 / span 18;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 1.5rem 1.5rem;
+    padding: 0;
+}
+
+.cit__setting {
+    grid-column-end: span 5;
+    display: flex;
+    flex-direction: column;
+    background-color: #424242;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    border-radius: 1rem;
+    height: 10rem;
+    width: 100%;
+    /**/
+    line-height: 10rem;
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff80
+}
+
+.cit__setting:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    color: hsla(0, 0%, 100%, 0.8);
+}
+
+.cit__BtnSignOut {
+    grid-column-end: span 10;
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    width: 100%;
+    /* white background: #f2f2f2;*/
+    background: #cccccc;
+    opacity: 0.8;
+    border-radius: .5em;
+    z-index: 10;
+    /**/
+    line-height: 10rem;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00000080;
+    /**/
+    cursor: pointer;
+}
+
+.cit__BtnSignOut:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    color: #000000cc;
+}
+
+.cit__profileDiv {
+    grid-column-end: span 10;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.cit__profileCard {
+    grid-column-end: span 10;
+    display: flex;
+    flex-direction: column;
+    height: 15rem;
+    width: 100%;
+    /* white background: #cccccc;*/
+    background: #444444;
+    border-radius: 400px 3rem 3rem 400px;
+}
+
+.cit__profileImage {
+    position: absolute;
+    height: 15rem;
+    width: 15rem;
+    border-radius: 40px;
+    border: .5rem solid #4c4c4c;
+    margin-left: 0px;
+    background: #323232;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+}
+
+.cit_userimage {
+    width: 100%;
+    height: 100%;
+    max-width: 15rem;
+    max-height: 15rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cit__profileImageChange {
+    position: absolute;
+    height: 3rem;
+    width: 100%;
+    top: 100%;
+    margin: -3rem 0px 0px 0px;
+    color: #FFF;
+    font-size: 24px;
+    /**/
+    background: #cccccc;
+    opacity: 0.8;
+}
+
+.cit__profileImageChange center span {
+    margin-top: .5rem;
+}
+
+.cit__profileImageChange:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.cit__proInfo {
+    position: relative;
+    border-radius: .5em;
+    left: 16rem;
+    width: 20vw;
+    top: 5rem;
+    color: #cccccc;
+    font-size: 2vh;
+}
+
+.nav-list {
+    z-index: 9999;
+    padding: 1rem 0;
+    width: 5rem;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    /**/
+    overflow: hidden;
+    background-color: #323232;
+}
+
+.nav-item {
+    margin: 10px;
+    list-style: none;
+    font-size: 0.7rem;
+    text-align: center;
+    transition: all 200ms ease-in;
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-item i {
+    font-size: 20px;
+}
+
+.nav-item a:hover {
+    color: #a9a9ff;
+}
+
+.nav-item a:focus {
+    box-shadow: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-itemlabel {
+    display: block;
+}
+
+.btnAdd {
+    display: flex;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    /**/
+    padding: 2px;
+    border: 1px solid #3a3a3a;
+}
+
+.btnAdd:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+main {
+    margin-top: 0;
+    margin-left: 6rem;
+    margin-right: 1rem;
+}
+
+@media screen and (max-width: 550px) {
+    main {
+        margin: 10px;
+        margin-top: 0;
+    }
+    .cit__navonline {
+        border-top: solid 5px #99CC99;
+        border-right: solid 0px #99CC99;
+        transition: border 700ms;
+    }
+    .cit__navoffline {
+        border-top: solid 5px #ff9999;
+        border-right: solid 0px #ff9999;
+        transition: border 700ms;
+    }
+    .cit__navremove {
+        border-top: solid 0px #323232;
+        border-right: solid 0px #323232;
+        transition: border 300ms;
+    }
+    .cit__BtnSignOut {
+        height: 5rem;
+        line-height: 5rem;
+    }
+    .cit__profileCard {
+        height: 10rem;
+        border-radius: 50 0 0 50;
+    }
+    .cit__profileDiv {
+        border-radius: 50% 0 0 50%;
+    }
+    .cit__settings {
+        display: grid;
+        grid-column: 2 / span 18;
+        grid-template-columns: repeat(10, 1fr);
+        grid-gap: 1rem;
+        padding: 0;
+    }
+    .cit__setting {
+        grid-column-end: span 10;
+        height: 5rem;
+        line-height: 5rem;
+    }
+    .cit__profileImage {
+        height: 10rem;
+        width: 10rem;
+    }
+    .cit__Setting {
+        height: 5rem;
+    }
+    .cit__proInfo {
+        top: 3.5rem;
+        left: 9rem;
+        right: 1rem;
+        width: 16rem;
+        /**/
+        font-size: 1rem;
+    }
+    .nav-list {
+        z-index: 9999;
+        overflow: hidden;
+        flex-direction: row;
+        width: 100%;
+        height: 4rem;
+        bottom: 0;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 1rem;
+    }
+    .nav-item {
+        width: 1fr;
+    }
+    .nav-itemseparator {
+        color: lightblue;
+        width: 1px;
+        height: 100%;
+    }
+    .nav-item a:hover {
+        color: #A9A9FF;
+    }
+    .btnAdd {
+        bottom: 4.5rem;
+    }
+    /*.nav-itemlabel {
+        display: none;
+    }*/
+}

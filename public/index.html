@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CiT</title>
+    <link rel="icon" href="img/Cit_logo.png">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link rel="stylesheet" href="css/index.css">
+
+
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4c4c4c">
+    <meta name="theme-color" content="#4c4c4c">
+
+</head>
+
+<body>
+
+    <div class="cit__signContainer">
+
+        <div class="cit__signBox">
+
+            <center>
+
+                <img src="/img/Cit_Logo.png" alt="Logo" style="height:128px;width:128;">
+
+
+
+            </center>
+
+            <table class="cit__signFormOptions">
+
+                <tr>
+
+                    <td>
+
+                        <button id="btnSIn" onClick="actSIn()" class="cit__signOption cit__signOptionActive">Entrar</button>
+
+                    </td>
+
+                    <td>
+
+                        <button id="btnSUp" onClick="actSUp()" class="cit__signOption">Registar</button>
+
+                    </td>
+                </tr>
+
+            </table>
+
+            <!--Sign Up-->
+            <form id="signup-form" style="display:none;">
+
+                <center>
+
+                    <button id="btnSignUp" class="cit__signButton btn darken-2 z-depth-0 " align="center" disabled>Registar</button>
+
+                    <br>
+
+                    <h12 id="ShowOnOffSUp"></h12>
+
+                </center>
+
+                <div class="input-field">
+
+                    <input type="email" id="signupemail" required />
+
+                    <label for="signup-email">Email </label>
+
+                </div>
+
+                <div class="input-field darken-2">
+
+                    <input class='validate' type="password" id="signuppassword" required onChange="checkPassword();" />
+
+                    <label for="signuppassword">Password</label>
+
+                    <span toggle="#signuppassword" class="field-icon toggle-password">
+
+                        <span class="material-icons">visibility</span>
+
+                    </span>
+
+                </div>
+
+                <div class="input-field darken-2">
+
+                    <input class='validate' type="password" id="confirmsignuppassword" required onChange="checkPassword();" />
+
+                    <label for="confirmsignuppassword">Confirme a password</label>
+
+                    <span toggle="#confirmsignuppassword" class="field-icon toggle-password">
+                        
+                        <span class="material-icons">visibility</span>
+
+                    </span>
+
+                </div>
+
+                <p class="error pink-text center-align"></p>
+
+            </form>
+
+            <!--SignIn-->
+            <form id="signin-form">
+
+                <center>
+
+                    <button id="btnSignIn" class="cit__signButton btn darken-2 z-depth-0">Entrar</button>
+
+                    <br>
+
+                    <h12 id="ShowOnOffSIn"></h12>
+
+                </center>
+
+                <div class="input-field">
+
+                    <input type="email" id="signinemail" required />
+
+                    <label for="signin-email">Email</label>
+
+                </div>
+
+                <div class="input-field">
+
+                    <input type="password" id="signinpassword" required />
+
+                    <label for="signin-password">Password</label>
+
+                    <span toggle="#signinpassword" class="field-icon toggle-password">
+
+                        <span class="material-icons">visibility</span>
+
+                    </span>
+
+                </div>
+
+                <p class="error pink-text center-align"></p>
+
+                <br>
+
+                <a style="float: right; cursor: pointer; margin-top: 10px;" onClick="forgotPassword();">Esqueceu a password?</a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- #region Scripts -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        //auth firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const strg = firebase.storage();
+
+        const fbtimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+
+        //update firestore set
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
+
+    <script src="js/swreg.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <script>
+        var clicked = 0;
+
+        $(".toggle-password").click(function(e) {
+            e.preventDefault();
+
+            $(this).toggleClass("toggle-password");
+            if (clicked == 0) {
+                $(this).html('<span class="material-icons">visibility_off</span >');
+                clicked = 1;
+            } else {
+                $(this).html('<span class="material-icons">visibility</span >');
+                clicked = 0;
+            }
+
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
+
+    <!-- #endregion -->
+
+</body>
+
+</html>

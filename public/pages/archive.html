@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Archive</title>
+    <link rel="icon" href="../../img/Cit_logo.png">
+
+    <link rel="stylesheet" href="../css/archive.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
+    <link rel="stylesheet" href="../css/materialize.min.css">
+
+    <link rel="manifest" href="/manifest.json">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4c4c4c">
+    <meta name="theme-color" content="#4c4c4c">
+
+</head>
+
+<body>
+
+    <div class="nav">
+
+        <ul id="cit__nav" class="nav-list">
+
+            <li class="nav-item">
+                <a href="me.html">
+                    <span class="material-icons-outlined">person</span>
+                    <p class="nav-itemlabel">Perfil</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="archive.html" style="color: #a9a9ff !important;">
+                    <span class="material-icons">
+                        archive
+                    </span>
+                    <p class="nav-itemlabel">Arquivo</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="notes.html">
+                    <span class="material-icons-outlined">
+                        description
+                    </span>
+                    <p class="nav-itemlabel">Notas</p>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+    <main>
+
+
+
+
+        <!-- Edit Note MODAL -->
+        <div id="modal-edit" class="modal noteeditor">
+            <div class="modal-content ">
+                <table>
+                    <tr>
+                        <td>
+                            <h4 style="width: 100%;">Nota Arquivada</h4>
+                        </td>
+
+                        <td>
+
+                            <div align="end" onclick="modalEditor.close();">
+                                <span style="font-size: 40px; cursor: pointer !important;" class="material-icons-outlined">
+                            close
+                            </span></div>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <form id="unarchive-form" autocomplete="off">
+                    <div style="display:none;">
+                        <input type="text" id="noteId" required>
+
+                    </div>
+                    <div class="input-field ">
+                        <input autocomplete="off" type="text" id="edittitle" class="txtcwhite" required disabled style="color:#fff;">
+                        <label id="lbltitle" for="edittitle" class="active" style="color:#fff;">Titulo</label>
+                    </div>
+                    <div class="input-field ">
+                        <input autocomplete="off" type="text" id="editcategory" class="txtcwhite" required disabled style="color:#fff;">
+                        <label id="lblcategory" for="editcategory" class="active" style="color:#fff;">Categoria</label>
+                    </div>
+                    <div class="input-field">
+                        <textarea autocomplete="off" id="editcontent" class="txtaarea" required disabled></textarea>
+                    </div>
+                    <div class="onlcorner z-depth-0" onclick="deleteArchivedNote();">
+                        <span style="font-size: 40px;" class="material-icons-outlined">
+                    delete
+                    </span>
+                    </div>
+
+
+
+                    <button class="onrcorner btn darken-2 z-depth-0">Desarquivar</button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+        <section class="citcards cit-archive">
+        </section>
+    </main>
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        //auth firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const strg = firebase.storage();
+
+        const fbtimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+
+        //update firestore set
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
+    <script src="../js/materialize.min.js"></script>
+
+    <script src="../js/archive.js"></script>
+
+    <script>
+        /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    var modals = document.querySelectorAll('.modal');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    M.Modal.init(modals);
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    var items = document.querySelectorAll('.collapsible');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    M.Collapsible.init(items);*/
+    </script>
+
+</body>
+
+
+</html>

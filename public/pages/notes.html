@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CiT</title>
+    <link rel="icon" href="../../img/Cit_logo.png">
+
+    <link rel="stylesheet" href="../css/notes.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
+    <link rel="stylesheet" href="../css/materialize.min.css">
+
+
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4c4c4c">
+    <meta name="theme-color" content="#4c4c4c">
+
+</head>
+
+<body>
+
+    <div class="cit__nav">
+
+        <ul id="cit__nav" class="nav-list">
+
+            <li class="nav-item">
+
+                <a href="me.html">
+
+                    <span class="material-icons-outlined">person</span>
+
+                    <p class="nav-itemlabel">Perfil</p>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="notes.html" style="color: #a9a9ff !important;">
+
+                    <span class="material-icons">description</span>
+
+                    <p class="nav-itemlabel">Notas</p>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="scans.html">
+
+                    <span class="material-icons-outlined">collections</span>
+
+                    <p class="nav-itemlabel">Scans</p>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- New Note MODAL -->
+    <div id="modal-NoteCreate" class="modal cit__notecreator">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Nova Nota</h4>
+
+                    </td>
+
+                    <td>
+
+                        <div align="end" onclick="modalNoteCreator.close();">
+
+                            <span style="font-size: 40px;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <br />
+
+            <form id="newnote-form" autocomplete="off">
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="text" id="title" class="txtcwhite" required>
+
+                    <label id="lbltitle" for="title" class="active">Titulo</label>
+
+                </div>
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="text" id="category" class="txtcwhite" list="categories" maxlength="8">
+
+                    <datalist id="categories">
+
+                    </datalist>
+
+                    <label id="lblcategory" for="category" class="active">Categoria</label>
+
+                </div>
+
+                <div class="input-field">
+
+                    <textarea autocomplete="off" id="content" class="txtaarea" required></textarea>
+
+                </div>
+
+                <button class="cit__onrcorner btn darken-2 z-depth-0">Criar</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <main>
+
+        <!-- Edit Note MODAL -->
+        <div id="modal-NoteEdit" class="modal cit__noteeditor">
+
+            <div class="modal-content ">
+
+                <table>
+
+                    <tr>
+
+                        <td>
+
+                            <h4 style="width: 100%;">Nota</h4>
+
+                        </td>
+
+                        <td>
+
+                            <div align="end" onclick="modalNoteEditor.close();">
+
+                                <span style="font-size: 40px; cursor: pointer;" class="material-icons-outlined">close</span>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <br />
+
+                <form id="editnote-form" autocomplete="off">
+
+                    <div style="display:none;">
+
+                        <input type="text" id="noteId" required>
+
+                    </div>
+
+                    <div class="input-field ">
+
+                        <input autocomplete="off" type="text" id="edittitle" class="txtcwhite" required>
+
+                        <label id="lbltitle" for="edittitle" class="active">Titulo</label>
+
+                    </div>
+
+                    <div class="input-field ">
+
+                        <input autocomplete="off" type="text" id="editcategory" class="txtcwhite" list="categories">
+
+                        <datalist id="categories">
+
+                    </datalist>
+
+                        <label id="lblcategory" for="editcategory" class="active">Categoria</label>
+
+                    </div>
+
+                    <div class="input-field">
+
+                        <textarea autocomplete="off" id="editcontent" class="txtaarea" required></textarea>
+
+                    </div>
+
+                    <div class="cit__onlcorner z-depth-0" onclick="archive();">
+
+                        <span style="font-size: 40px;" class="material-icons-outlined">archive</span>
+
+                    </div>
+
+                    <div class="cit__onlcorner2 z-depth-0" onClick="pasteToNote()" id="scantextPaste">
+
+                        <span style="font-size: 40px;" class="material-icons-outlined">content_paste</span>
+
+                    </div>
+
+                    <button class="cit__onrcorner btn darken-2 z-depth-0">Guardar</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="btnAdd btn-floating btn-large waves-effect waves-light " align="center" onclick="modalNoteCreator.open();">
+
+            <i class="material-icons">add</i>
+
+        </div>
+
+        <section class="citcards cit-notes">
+
+        </section>
+
+    </main>
+
+    <!--#region Scripts-->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        //auth firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const strg = firebase.storage();
+
+        const fbtimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+
+        //update firestore set
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
+    <script src="../js/materialize.min.js"></script>
+
+    <script src="../js/notes.js"></script>
+
+    <!-- #endregion -->
+
+</body>
+
+</html>

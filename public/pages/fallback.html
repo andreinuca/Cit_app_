@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Offline</title>
+    <link rel="icon" href="img/Cit_logo.png">
+
+    <!-- materialize icons, css & js -->
+    <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4c4c4c">
+    <meta name="theme-color" content="#4c4c4c">
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        background-color: #4c4c4c;
+    }
+    
+    h5 {
+        margin-top: 30% !important;
+        color: #fff;
+    }
+    
+    .btn {
+        background-color: #A9A9FF !important;
+    }
+    
+    .cit__fallbackDiv {
+        width: 300px;
+        height: 300px;
+        margin: 0;
+        position: absolute;
+        border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: #424242;
+    }
+</style>
+
+<body>
+
+    <div class="cit__fallbackDiv">
+
+        <center>
+
+            <h5>
+
+                Não pode aceder a esta pagina sem conexão á internet
+
+            </h5>
+
+            <div class="btn waves-effect waves-light" onClick="window.location.href = '/pages/me.html'; ">
+
+                Voltar á pagina inicial
+
+            </div>
+
+        </center>
+
+    </div>
+
+
+
+
+</body>
+
+</html>

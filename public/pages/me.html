@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CiT</title>
+    <link rel="icon" href="../img/Cit_logo.png">
+
+    <link rel="stylesheet" href="../css/me.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/materialize.min.css">
+
+    <script src="../js/materialize.min.js"></script>
+
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4c4c4c">
+    <meta name="theme-color" content="#4c4c4c">
+
+</head>
+
+
+<body>
+
+    <div class="cit__nav">
+
+        <ul id="cit__nav" class="nav-list">
+
+            <li class="nav-item">
+
+                <a href="me.html" style="color: #a9a9ff !important;">
+
+                    <span class="material-icons">person</span>
+
+                    <p class="nav-itemlabel">Perfil</p>
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+
+                <a href="notes.html">
+
+                    <span class="material-icons-outlined">
+                        description
+                    </span>
+                    <p class="nav-itemlabel">Notas</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="scans.html">
+                    <span class="material-icons-outlined">collections</span>
+
+                    <p class="nav-itemlabel">Scans</p>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Change Name MODAL -->
+    <div id="modal-changeName" class="modal cit__userchanger">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Mudar Nome</h4>
+
+                    </td>
+
+                    <td>
+
+                        <div align="end" onClick="cit__changeCloser(2);" style="cursor: pointer;">
+
+                            <span style="font-size: 40px;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <form id="newusername-form" autocomplete="off" enctype="multipart/form-data" style="height: 100%;">
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="text" id="newusername" class="txtcwhite" required>
+
+                    <label id="lblnewusername" for="newusername" class="active">Novo Nome</label>
+
+                </div>
+
+                <br>
+
+                <button class="waves-effect waves-light cit__BtnchangeSave btn">Guardar</button>
+
+            </form>
+
+
+        </div>
+    </div>
+
+    <!-- Change Email MODAL 
+    <div id="modal-changeEmail" class="modal cit__userchanger">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Mudar Email</h4>
+
+                    </td>
+
+                    <td>
+
+                        <div align="end" onClick="cit__changeCloser(3);" style="cursor: pointer;">
+
+                            <span style="font-size: 40px;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <form id="newuseremail-form" autocomplete="off" enctype="multipart/form-data">
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="email" id="newuseremail" class="txtcwhite" required onChange="checkEmail();">
+
+                    <label id="lblnewuseremail" for="newuseremail" class="active">Novo email</label>
+
+                </div>
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="email" id="confirmnewuseremail" class="txtcwhite" required onChange="checkEmail();">
+
+                    <label id="lblconfirmnewuseremail" for="confirmnewuseremail" class="active">Confirmar novo email</label>
+
+                </div>
+
+                <br>
+
+                <button id="btnnewemail" class="waves-effect waves-light cit__BtnchangeSave btn" disabled>Guardar</button>
+
+            </form>
+
+        </div>
+
+    </div>-->
+
+    <!-- Change Password MODAL -->
+    <div id="modal-changePassword" class="modal cit__userchanger">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Mudar Password</h4>
+
+                    </td>
+
+                    <td>
+
+
+                        <div align="end" onClick="cit__changeCloser(4);" style="cursor: pointer;">
+
+                            <span style="font-size: 40px;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <form id="newuserpassword-form" autocomplete="off" enctype="multipart/form-data">
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="text" id="newuserpassword" class="txtcwhite" required onChange="checkPassword();">
+
+                    <label id="lblnewuserpassword" for="newuserpassword" class="active">Nova password</label>
+
+                </div>
+
+                <div class="input-field ">
+
+                    <input autocomplete="off" type="text" id="confirmnewuserpassword" class="txtcwhite" required onChange="checkPassword();">
+
+                    <label id="lblconfirmnewuserpassword" for="confirmnewuserpassword" class="active">Confirmar nova password</label>
+
+                </div>
+
+                <br>
+
+                <button id="btnnewpassword" class="waves-effect waves-light cit__BtnchangeSave btn" disabled>Guardar</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Change ProfilePic MODAL -->
+    <div id="modal-changeProfilePic" class="modal cit__userchanger">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Mudar Imagem de Perfil</h4>
+
+                    </td>
+
+                    <td>
+
+                        <div align="end" onClick="cit__changeCloser(1);" style="cursor: pointer;">
+
+                            <span style="font-size: 40px;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <form id="newprofilepic-form" autocomplete="off" enctype="multipart/form-data">
+
+                <div class="file-field input-field">
+
+                    <div class="btn waves-effect waves-light">
+
+                        <span>Nova Imagem</span>
+
+                        <input type="file" required id="files" name="Files[]" onchange="readURL(this);" />
+
+                    </div>
+
+                    <div class="file-path-wrapper">
+
+                        <input class="file-path validate" type="text">
+
+                    </div>
+
+                </div>
+
+                <center>
+
+                    <img style="max-height:200px; max-width:200px;" id="newprofilepic" src="#" alt="A sua imagem" />
+
+                </center>
+
+                <br>
+
+                <button class="waves-effect waves-light cit__BtnchangeSave btn">Guardar</button>
+            </form>
+
+
+        </div>
+    </div>
+
+    <main>
+
+        <section class="cit__settings">
+
+            <div id="profileCard" class="cit__profileDiv">
+
+            </div>
+
+            <div id="setting2" class=" waves-effect waves-light cit__setting " onClick="cit__changeOpener(2);">
+
+                Mudar Nome
+
+            </div>
+
+            <!--<div id="setting3" class="waves-effect waves-light cit__setting" onClick="cit__changeOpener(3);">
+
+                Mudar Email
+            </div>-->
+
+            <div id="setting4" class="waves-effect waves-light cit__setting" onClick="cit__changeOpener(4);">
+
+                Mudar Password
+
+            </div>
+
+            <div class="waves-effect waves-light cit__setting" onClick="window.location.href = 'help.html';">
+
+                Ajuda
+
+            </div>
+
+            <div class="waves-effect waves-light cit__setting" onClick="window.location.href = 'archive.html';">
+
+                Arquivo
+
+            </div>
+
+            <div class="waves-effect waves-light cit__BtnSignOut" id="signout" valign="bottom">
+
+
+                Sair
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!--#region Scripts-->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        //auth firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const strg = firebase.storage();
+
+        const fbtimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+
+        //update firestore set
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
+
+    <script src="../js/me.js"></script>
+
+    <!--#endregion-->
+
+</body>
+
+</html>

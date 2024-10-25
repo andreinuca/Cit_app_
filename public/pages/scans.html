@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CiT</title>
+    <link rel="icon" href="../img/Cit_logo.png">
+
+    <link rel="stylesheet" href="../css/scans.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
+    <link rel="stylesheet" href="../css/materialize.min.css">
+
+    <script src="../js/materialize.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.4/tesseract.min.js'></script>
+
+    <link rel="manifest" href="/manifest.json">
+    <!-- ios support -->
+    <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#4c4c4c">
+    <meta name="theme-color" content="#4c4c4c">
+
+</head>
+
+<body>
+
+    <div class="nav">
+
+        <ul id="cit__nav" class="nav-list">
+
+            <li class="nav-item">
+
+                <a href="me.html">
+
+                    <span class="material-icons-outlined">person</span>
+
+                    <p class="nav-itemlabel">Perfil</p>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="notes.html">
+
+                    <span class="material-icons-outlined">description</span>
+
+                    <p class="nav-itemlabel">Notas</p>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="scans.html" style="color: #a9a9ff !important;">
+
+                    <span class="material-icons">collections</span>
+
+                    <p class="nav-itemlabel">Scans</p>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Show Scan MODAL -->
+    <div id="modal-scaneditor" class="modal scaneditor">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Scan</h4>
+
+                    </td>
+
+                    <td>
+
+                        <div align="end" onclick="modalScanEditor.close();">
+
+                            <span style="font-size: 40px; cursor: pointer;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <div style="display:none;">
+
+                <input type="text" id="scanId" required>
+
+            </div>
+
+            <br>
+            <br>
+
+
+            <div class="input-field ">
+
+                <input autocomplete="off" type="text" id="scanshwdescription" class="txtcwhite" required>
+
+                <label id="lblscanshwdescription" for="scanshwdescription" class="active">Descrição</label>
+
+            </div>
+
+
+
+            <button class="onrcorner btn darken-2 z-depth-0" onClick="ScanDelete()">Apagar</button>
+
+            <ul class="rowtomobcol">
+
+                <li class="rowtomobcolitem">
+
+                    <img style="min-height:100px; max-height:400px" class="cit__scanimg" id="scanshwimg" src="#" alt="A sua imagem" />
+
+                </li>
+
+                <li class="rowtomobcolitem">
+
+                    <textarea autocomplete="off" id="scancontent" class="txtaareasc" required></textarea>
+
+                </li>
+
+            </ul>
+
+            <div class="onlcorner btn darken-2 z-depth-0" onClick="copyToNote();">
+                Copiar para nota
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- New Scan MODAL -->
+    <div id="modal-scancreator" class="modal scancreator">
+
+        <div class="modal-content ">
+
+            <table>
+
+                <tr>
+
+                    <td>
+
+                        <h4 style="width: 100%;">Scan de texto</h4>
+
+                    </td>
+
+                    <td>
+
+                        <div align="end" onclick="closescancreator();">
+
+                            <span style="font-size: 40px;" class="material-icons-outlined">close</span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+
+            <form id="newscan-form" autocomplete="off" enctype="multipart/form-data">
+
+                <ul class="rowtomobcol">
+
+                    <li class="rowtomobcolitem">
+
+                        <div class="input-field ">
+
+                            <input autocomplete="off" type="text" id="description" class="txtcwhite" required>
+
+                            <label id="lbltitle" for="description" class="active">Descrição</label>
+
+                        </div>
+
+                    </li>
+
+                    <li class="rowtomobcolitem">
+
+                        <div class="file-field input-field">
+
+                            <div class="btn waves-effect waves-light">
+
+                                <span>Adicione uma imagem</span>
+
+                                <input type="file" required id="files" name="Files[]" onchange="readURL(this);" />
+
+                            </div>
+
+                            <div class="file-path-wrapper">
+
+                                <input class="file-path validate" type="text">
+
+                            </div>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+                <ul class="rowtomobcol">
+
+                    <li class="rowtomobcolitem">
+
+                        <img style="min-height:100px; max-height:400px" class="cit__scanimg" id="scanimg" src="#" alt="A sua imagem" />
+
+                        <h4 id="scan-progress"></h4>
+
+                    </li>
+
+                    <li class="rowtomobcolitem">
+
+
+
+                        <textarea id="area-scan" class="txtaarea"></textarea>
+
+                    </li>
+
+                </ul>
+
+                <button class="onrcorner btn darken-2 z-depth-0">Guardar</button>
+
+            </form>
+
+            <button class="onlcorner btn darken-2 z-depth-0" onClick="CitScanImage();">Scan</button>
+
+        </div>
+    </div>
+
+    <div id="cit__btnscan" class="btnAdd btn-floating btn-large waves-effect waves-light " align="center" onclick="modalScanCreator.open();">
+
+        <i class="material-icons">add</i>
+
+    </div>
+
+    <main>
+        <section class="citcards cit-scans">
+        </section>
+    </main>
+
+    <!--#region Scripts-->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        //auth firestore reference
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const strg = firebase.storage();
+
+        const fbtimestamp = firebase.firestore.FieldValue.serverTimestamp;
+
+
+        //update firestore set
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
+
+    <script src="../js/scans.js"></script>
+
+    <!--#endregion-->
+
+</body>
+
+</html>
